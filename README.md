@@ -24,7 +24,7 @@
 
   - A SVG logo file is generated using the user's input.
 
-  - [ Video link](https://drive.google.com/file/d/1AKkGT7Yh5xzplMMJqgTtfwYmNdO8SThJ/view)
+  - [ Video link](https://drive.google.com/file/d/1clxeQq6CBEqytddUf5tI7nKM7oVCMYEd/view)
 
   ## Installation
   - node js
@@ -33,7 +33,7 @@
   - git clone https://github.com/YemnyFeliz/SVG-logoMaker.git
 
   ## Usage
-  ![Demo](./assets/demo.gif)
+  ![Demo](./assets/svgLogo.gif)
 
   ## Credits
   N/A
