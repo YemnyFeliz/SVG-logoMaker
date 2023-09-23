@@ -1,5 +1,7 @@
 const square = require('../lib/square');
 
+//Tests the square
+
 describe ('square', () => {
     it('it should return a square', () => {
         const svgSquare = new square('ASD', 'green', 'blue');

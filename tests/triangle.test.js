@@ -1,5 +1,7 @@
 const triangle = require('../lib/triangle');
 
+//Tests the triangle
+
 describe ('triangle', () => {
     it('should return a triangle', () => {
         const svgTriangle = new triangle ('SSS', 'white', 'pink');

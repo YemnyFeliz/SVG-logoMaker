@@ -3,7 +3,7 @@ const fs = require('fs');
 const circle = require('./lib/circle');
 const triangle = require('./lib/triangle');
 const square = require('./lib/square');
-//const svgGenerator = require('./lib/svgGenerator');
+
 
 const questions = [
     {
@@ -46,13 +46,14 @@ const questions = [
 
 const writeToFile = async (fileName, data) => {
     await fs.promises.writeFile(fileName, data, (err) =>
-      console.error("Error: ", err)
+        console.error("Error: ", err)
     );
-  };
+};
 
-  const svgGenerator = (data) => {
+//renders a function (new circle, new square, new triangle, based on shape data input by user)
+const svgGenerator = (data) => {
     let logoMaker;
-    
+
     switch (data.shape) {
 
         case 'circle':
@@ -66,26 +67,27 @@ const writeToFile = async (fileName, data) => {
         case 'triangle':
             logoMaker = new triangle(data.text, data.fontColor, data.logoColor);
             break;
-            
+
     }
     return logoMaker
 
 
 }
 
+//shape data is stored in newLogo and svg is created using writeToFile function
 const init = () => {
     inquirer
-    .prompt(questions)
-    .then((data) => {
-        let newLogo = svgGenerator(data);
-        newLogo.render();
-        //console.log(newLogo);
-        
-        console.log('SVG logo has been generated!');
-        writeToFile('Logo.svg', newLogo.render());
+        .prompt(questions)
+        .then((data) => {
+            let newLogo = svgGenerator(data);
+            newLogo.render();
+            //console.log(newLogo);
 
-    })
-    .catch((err) => console.error(err));
+            console.log('SVG logo has been generated!');
+            writeToFile('Logo.svg', newLogo.render());
+
+        })
+        .catch((err) => console.error(err));
 };
 init();
 

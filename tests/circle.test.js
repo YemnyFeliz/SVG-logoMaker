@@ -1,5 +1,7 @@
 const circle = require('../lib/circle');
 
+//Tests the circle
+
 describe ('circle', () => {
  it('should return a circle', () => {
     const svgCircle = new circle('GHJ', 'black', 'yellow');
