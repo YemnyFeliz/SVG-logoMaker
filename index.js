@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shapes = require('./lib/shapes')
 const circle = require('./lib/circle');
 const triangle = require('./lib/triangle');
 const square = require('./lib/square');
+//const svgGenerator = require('./lib/svgGenerator');
 
 const questions = [
     {
@@ -39,40 +39,53 @@ const questions = [
     {
         type: 'input',
         name: 'logoColor',
-        message: 'Please enter a color, a key word or hexadecimal number, for the text color',
+        message: 'Please enter a color, a key word or hexadecimal number, for the logo color',
     },
 
 ];
 
+const writeToFile = async (fileName, data) => {
+    await fs.promises.writeFile(fileName, data, (err) =>
+      console.error("Error: ", err)
+    );
+  };
 
-
-const svgGenerator = ({ text, fontColor, shape, logoColor}) => {
+  const svgGenerator = (data) => {
     let logoMaker;
-    switch (shape){
-        case "Circle":
-          logoMaker = new circle();
-          break;
-        case "Triangle":
-          logoMaker = new triangle();
-          break;
-        case "Square":
-          logoMaker = new square();
-          break;
-      }
-};
+    
+    switch (data.shape) {
 
+        case 'circle':
+            logoMaker = new circle(data.text, data.fontColor, data.logoColor);
+            break;
+
+        case 'square':
+            logoMaker = new square(data.text, data.fontColor, data.logoColor);
+            break;
+
+        case 'triangle':
+            logoMaker = new triangle(data.text, data.fontColor, data.logoColor);
+            break;
+            
+    }
+    return logoMaker
+
+
+}
 
 const init = () => {
     inquirer
-      .prompt(questions)
-      // Destructure the data for text, fontColor, shape, and color
-      .then(({ text, fontColor, shape, color }) => {
-        svgGenerator({ text, fontColor, shape, color });
-      })
-      .catch((err) => {
-        console.error("Error: ", err);
-      });
-  };
-  
-  init();
+    .prompt(questions)
+    .then((data) => {
+        let newLogo = svgGenerator(data);
+        newLogo.render();
+        //console.log(newLogo);
+        
+        console.log('SVG logo has been generated!');
+        writeToFile('Logo.svg', newLogo.render());
+
+    })
+    .catch((err) => console.error(err));
+};
+init();
 

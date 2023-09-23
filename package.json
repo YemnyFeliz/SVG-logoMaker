@@ -6,7 +6,7 @@
   "directories": {
     "example": "examples",
     "lib": "lib",
-    "test": "tests"
+    "test": "jest"
   },
   "dependencies": {
     "ansi-escapes": "^4.3.2",
@@ -232,7 +232,8 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC"
